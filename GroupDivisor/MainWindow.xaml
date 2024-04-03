@@ -5,15 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TextFileExample"
         mc:Ignorable="d"
+        ResizeMode="CanMinimize"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Add name" HorizontalAlignment="Left" Margin="286,23,0,0" VerticalAlignment="Top" Click="AddName"/>
-        <TextBox x:Name="nameField" HorizontalAlignment="Left" Margin="64,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
-        <TextBlock x:Name="nameList" HorizontalAlignment="Left" Margin="64,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="320" Width="217" Background="#FFDADADA" FontStretch="Normal"/>
-        <Label Content="We can make:" HorizontalAlignment="Left" Margin="382,21,0,0" VerticalAlignment="Top" Width="83" Cursor=""/>
-        <TextBlock x:Name="groupResult" HorizontalAlignment="Left" Margin="382,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="180" Width="320" Background="#FF00FFB0"/>
-        <Button Content="Divide" HorizontalAlignment="Left" Margin="286,79,0,0" VerticalAlignment="Top" Click="Divide" Width="59"/>
-        <TextBlock x:Name="groupStructure" HorizontalAlignment="Left" Margin="470,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" Background="#FF00FFB0" Height="37"/>
-
+        <Button Content="Add name" HorizontalAlignment="Center" Margin="0,23,0,0" VerticalAlignment="Top" Click="AddName" Width="75" Background="#FF00FFB0"/>
+        <TextBox x:Name="nameField" HorizontalAlignment="Left" Margin="43,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="311"/>
+        <ListView Margin="43,79,446,44" x:Name="nameList">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="270" DisplayMemberBinding="{Binding}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="We can make:" HorizontalAlignment="Left" Margin="469,17,0,0" VerticalAlignment="Top" Width="83" Cursor="" RenderTransformOrigin="1.028,0.528"/>
+        <TextBlock x:Name="groupResult" HorizontalAlignment="Left" Margin="469,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="254" Width="295" Background="#FF00FFB0"/>
+        <Button Content="Delete name" HorizontalAlignment="Center" Margin="0,79,0,0" VerticalAlignment="Top" Click="DeleteName" Width="76" Background="#FFFF6C5C"/>
+        <TextBlock x:Name="groupStructure" HorizontalAlignment="Left" Margin="469,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="295" Background="#FF00FFB0" Height="37"/>
+        <Label Content="Result:" HorizontalAlignment="Left" Margin="469,105,0,0" VerticalAlignment="Top" Width="83" Cursor="" RenderTransformOrigin="1.028,0.528"/>
+        <Button Content="Divide" HorizontalAlignment="Center" Margin="0,136,0,0" VerticalAlignment="Top" Click="Divide" Width="75" Background="#FF00FFB0"/>
+        <Label x:Name="addNameError" HorizontalAlignment="Left" Margin="43,47,0,0" VerticalAlignment="Top" Width="300" Cursor="" RenderTransformOrigin="1.028,0.528" Height="27" Foreground="Red"/>
     </Grid>
 </Window>

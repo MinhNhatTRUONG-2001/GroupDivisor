@@ -29,16 +29,45 @@ namespace TextFileExample
             {
                 File.WriteAllText("names.txt", "");
             }
-            nameList.Text = File.ReadAllText("names.txt");
-            names = nameList.Text.Split('\n', StringSplitOptions.RemoveEmptyEntries).ToList();
+            var nameLines = File.ReadAllLines("names.txt");
+            names = new List<string>(nameLines);
+            nameList.ItemsSource = names;
         }
 
         private void AddName(object sender, RoutedEventArgs e)
         {
-            File.AppendAllText("names.txt", nameField.Text + Environment.NewLine);
-            nameList.Text = File.ReadAllText("names.txt");
-            names.Add(nameField.Text);
-            nameField.Text = "";
+            if (nameField.Text == null ||  nameField.Text.Trim() == "")
+            {
+                addNameError.Content = "Input is empty";
+            }
+            else if (names.Contains(nameField.Text.Trim()))
+            {
+                addNameError.Content = "Name is already in the list";
+            }
+            else
+            {
+                File.AppendAllText("names.txt", nameField.Text.Trim() + Environment.NewLine);
+                names.Add(nameField.Text.Trim());
+                nameField.Text = "";
+                nameList.Items.Refresh();
+                addNameError.Content = "";
+            }
+        }
+
+        private void DeleteName(object sender, RoutedEventArgs e)
+        {
+            if (nameList.SelectedItem != null)
+            {
+                string? selectedName = (string)nameList.SelectedItem;
+                names.Remove(selectedName);
+                File.WriteAllLines("names.txt", names);
+                nameList.Items.Refresh();
+                addNameError.Content = "";
+            }
+            else
+            {
+                addNameError.Content = "Please select a name to delete.";
+            }
         }
 
         private void Divide(object sender, RoutedEventArgs e)
